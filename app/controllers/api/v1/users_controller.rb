@@ -8,23 +8,54 @@ module Api
       # GET /users
       def index
         @users = User.all
-        json_response(@users)
+           if @users
+              render json: {
+              users: @users
+           }
+          else
+              render json: {
+              status: 500,
+              errors: ['no users found']
+          }
+         end
       end
     
       # POST /users
       def create
-        @user = User.create!(permit_params)
-        json_response(@user, :created)
+        @user = User.new(user_params)
+             if @user.save
+                 login!  
+                 render json: {
+                 status: :created,
+                 user: @user
+             }
+            else 
+                render json: {
+                status: 500,
+                errors: @user.errors.full_messages
+            }
+            end
+        
       end
     
       # GET /users/:id
       def show
-        json_response(@user)
+        @user = User.find(params[:id])
+           if @user
+              render json: {
+              user: @user
+           }
+           else
+              render json: {
+              status: 500,
+              errors: ['user not found']
+            }
+           end
       end
     
       # PUT /users/:id
       def update
-        @user.update(permit_params)
+        @user.update(user_params)
         json_response(@user)
         #head :no_content
       end
@@ -37,9 +68,9 @@ module Api
     
       private
     
-      def permit_params
+      def user_params
         # whitelist params
-        params.permit(:name, :password, :email, :weight, :height)
+        params.require(:user).permit(:name, :password, :password_confirmation)
       end
     
       def set_user
