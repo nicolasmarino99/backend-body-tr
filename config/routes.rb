@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1 do
+      resources :users do
+        resources :progres_photos
+        resources :categorys do
+          resources :tasks do
+            resources :progress_items
+          end
+        end
+      end
+    end
+  end
 end
