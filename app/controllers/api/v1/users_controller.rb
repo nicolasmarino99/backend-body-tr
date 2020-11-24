@@ -70,7 +70,7 @@ module Api
     
       def user_params
         # whitelist params
-        params.require(:user).permit(:name, :password, :password_confirmation)
+        params.require(:user).permit(:name, :password, :password_confirmation, :weight, :height, :email)
       end
     
       def set_user

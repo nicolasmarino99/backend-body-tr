@@ -8,5 +8,5 @@ class User < ApplicationRecord
   # validation
   validates :name, uniqueness: true
   validates :name, length: { minimum: 4 }
-  validates_presence_of :name, :password_digest, :email, :weight, :height
+  validates_presence_of :name, :password, :password_confirmation, :email, :weight, :height
 end
