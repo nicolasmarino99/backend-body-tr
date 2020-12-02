@@ -9,7 +9,7 @@ module Api
           @categorys = Category.all
           json_response(@categorys)
         end
-
+        
         # POST /users
         def create
           @category = Category.create!(permit_params)
@@ -38,7 +38,7 @@ module Api
 
         def permit_params
           # whitelist params
-          params.permit(:name, :user_id, :category)
+          params.permit(:name, :user_id, :category, :img)
         end
 
         def set_category
