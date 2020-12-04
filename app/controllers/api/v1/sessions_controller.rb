@@ -10,7 +10,7 @@ module Api
                 logged_in: true,
                 user: @user
               }
-            else
+            else  
               render json: { 
                 status: 401,
                 errors: ['no such user, please try again']
