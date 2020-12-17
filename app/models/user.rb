@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :categorys
 
   has_secure_password
-  
+    
   # validation
   validates :name, uniqueness: true
   validates :name, length: { minimum: 4 }
