@@ -2,8 +2,7 @@ module Api
   module V1
     class TasksController < ApplicationController
         before_action :set_task, only: [:show, :update, :destroy]
-            
-            
+
         # GET /users/:id/tasks
         def index
           @tasks = Task.all

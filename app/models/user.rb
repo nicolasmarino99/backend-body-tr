@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 # model association
   has_many :progess_items
-  has_many :categorys
+  has_many :categories
   has_many :tasks
 
   has_secure_password
