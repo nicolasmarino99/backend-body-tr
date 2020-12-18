@@ -2,17 +2,16 @@ module Api
   module V1
    class CategorysController < ApplicationController
         before_action :set_category, only: [:show, :update, :destroy]
-            
-            
+
         # GET /users/:id/categorys
         def index
-          @categorys = Category.all
+          @categorys = current_user.categorys
           json_response(@categorys)
         end
-        
+
         # POST /users
         def create
-          @category = Category.create!(permit_params)
+          @category = current_user.categorys.build(permit_params)
           json_response(@category, :created)
         end
 

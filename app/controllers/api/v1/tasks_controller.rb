@@ -38,7 +38,7 @@ module Api
 
         def permit_params
           # whitelist params
-          params.permit(:name, :category_id, :progress_item)
+          params.permit(:name, :category_id, :progress_item, :img, :task)
         end
 
         def set_task
