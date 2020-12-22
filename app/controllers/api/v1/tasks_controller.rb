@@ -1,17 +1,17 @@
 module Api
   module V1
     class TasksController < ApplicationController
-        before_action :set_task, only: [:show, :update, :destroy]
+        before_action :get_category, :set_task, only: [:show, :update, :destroy]
 
         # GET /users/:id/tasks
         def index
-          @tasks = Task.all
+          @tasks = current_user.categories.find(params[:category_id]).tasks.all
           json_response(@tasks)
         end
 
         # POST /users
         def create
-          @task = Task.create!(permit_params)
+          @task = current_user.categories.find(params[:category_id]).tasks.create!(permit_params)
           json_response(@task, :created)
         end
 
@@ -42,6 +42,10 @@ module Api
 
         def set_task
           @task = Task.find(params[:id])
+        end
+
+        def get_category
+          @category = Category.find(params[:category_id])
         end
     end
   end

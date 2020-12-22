@@ -1,7 +1,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      #protect_from_forgery with: :null_session
+      protect_from_forgery with: :null_session
       before_action :set_user, only: [:show, :update, :destroy]
       
       
@@ -70,7 +70,7 @@ module Api
     
       def user_params
         # whitelist params
-        params.require(:user).permit(:name, :password, :password_confirmation, :weight, :height, :email)
+        params.require(:user).permit(:name, :password, :password_confirmation, :email)
       end
     
       def set_user

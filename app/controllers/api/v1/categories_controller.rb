@@ -5,13 +5,13 @@ module Api
 
         # GET /users/:id/categorys
         def index
-          @categories = current_user.categories
+          @categories = current_user.categories.all
           json_response(@categories)
         end
 
         # POST /users
         def create
-          @category = current_user.categories.build(permit_params)
+          @category = current_user.categories.create!(permit_params)
           json_response(@category, :created)
         end
 
