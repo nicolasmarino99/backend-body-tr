@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :category
-  has_many :progess_item, dependent: :destroy
+  has_many :progress_items, dependent: :destroy
 
   validates_presence_of :name
 end

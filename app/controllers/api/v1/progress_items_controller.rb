@@ -6,13 +6,13 @@ module Api
             
         # GET /users/:id/progress_items
         def index
-          @progress_items = ProgressItem.all
+          @progress_items = current_user.categories.find(params[:category_id]).tasks.find(params[:task_id]).progress_items.all
           json_response(@progress_items)
         end
 
         # POST /users
         def create
-          @progress_item = ProgressItem.create!(permit_params)
+          @progress_item = current_user.categories.find(params[:category_id]).tasks.find(params[:task_id]).progress_items.create!(permit_params)
           json_response(@progress_item, :created)
         end
 
@@ -38,7 +38,7 @@ module Api
 
         def permit_params
           # whitelist params
-          params.permit(:metric, :amount, :task_id)
+          params.permit(:metric, :amount, :task_id, :category_id, :user_id)
         end
 
         def set_progress_item

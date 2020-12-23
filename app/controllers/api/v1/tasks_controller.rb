@@ -1,7 +1,7 @@
 module Api
   module V1
     class TasksController < ApplicationController
-        before_action :get_category, :set_task, only: [:show, :update, :destroy]
+        before_action :set_task, only: [:show, :update, :destroy]
 
         # GET /users/:id/tasks
         def index
@@ -37,7 +37,7 @@ module Api
 
         def permit_params
           # whitelist params
-          params.permit(:name, :category_id, :progress_item, :img, :task)
+          params.permit(:name, :category_id, :progress_item, :img, :task, :user_id)
         end
 
         def set_task
