@@ -43,10 +43,6 @@ module Api
         def set_task
           @task = Task.find(params[:id])
         end
-
-        def get_category
-          @category = Category.find(params[:category_id])
-        end
     end
   end
 end
