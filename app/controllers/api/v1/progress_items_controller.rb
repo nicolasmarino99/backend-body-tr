@@ -2,17 +2,25 @@ module Api
   module V1
     class ProgressItemsController < ApplicationController
         before_action :set_progress_item, only: [:show, :update, :destroy]
-            
-            
+
         # GET /users/:id/progress_items
         def index
-          @progress_items = current_user.categories.find(params[:category_id]).tasks.find(params[:task_id]).progress_items.all
+          @progress_items = current_user.categories
+                            .find(params[:category_id])
+                            .tasks.find(params[:task_id])
+                            .progress_items
+                            .all
           json_response(@progress_items)
         end
 
         # POST /users
         def create
-          @progress_item = current_user.categories.find(params[:category_id]).tasks.find(params[:task_id]).progress_items.create!(permit_params)
+          p current_user.categories, permit_params
+          @progress_item = current_user.categories
+                           .find(params[:category_id])
+                           .tasks.find(params[:task_id])
+                           .progress_items
+                           .create!(permit_params)
           json_response(@progress_item, :created)
         end
 
@@ -38,7 +46,7 @@ module Api
 
         def permit_params
           # whitelist params
-          params.permit(:metric, :amount, :task_id, :category_id, :user_id)
+          params.permit(:metric, :amount, :task_id, :name, :description, :progress_item)
         end
 
         def set_progress_item
