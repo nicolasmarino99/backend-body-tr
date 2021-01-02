@@ -31,12 +31,8 @@ module Api
 
         # PUT /users/:id/progress_items/:id
         def update
-          p params[:progress], 'sssssssss'
           @progress_item[:progress] << params[:progress]
-          p permit_params, 'permit_params'
-          p @progress_item[:progress], 'params'
           @progress_item.update(permit_params)
-          p @progress_item[:progress], 'params'
           json_response(@progress_item)
           #head :no_content
         end
