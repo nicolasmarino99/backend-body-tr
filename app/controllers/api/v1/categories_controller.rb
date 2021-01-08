@@ -5,6 +5,7 @@ module Api
 
         # GET /users/:id/categorys
         def index
+          p current_user
           @categories = current_user.categories.all
           json_response(@categories)
         end
