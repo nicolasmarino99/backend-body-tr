@@ -5,13 +5,13 @@ module Api
 
         # GET /users/:id/tasks
         def index
-          @tasks = current_user.categories.find(params[:category_id]).tasks.all
+          @tasks = User.find(params[:user_id]).categories.find(params[:category_id]).tasks.all
           json_response(@tasks)
         end
 
         # POST /users
         def create
-          @task = current_user.categories.find(params[:category_id]).tasks.create!(permit_params)
+          @task = User.find(params[:user_id]).categories.find(params[:category_id]).tasks.create!(permit_params)
           json_response(@task, :created)
         end
 
@@ -37,7 +37,7 @@ module Api
 
         def permit_params
           # whitelist params
-          params.permit(:name, :category_id, :progress_item, :img, :task)
+          params.permit(:name, :category_id, :progress_item, :img, :task, :user_id)
         end
 
         def set_task
