@@ -12,7 +12,7 @@ module Api
 
         # POST /users
         def create
-          @category = current_user.categories.create!(permit_params)
+          @category = User.find(params[:user_id]).categories.create!(permit_params)
           json_response(@category, :created)
         end
 
