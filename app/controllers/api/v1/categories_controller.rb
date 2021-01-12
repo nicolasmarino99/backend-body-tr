@@ -38,7 +38,7 @@ module Api
 
         def permit_params
           # whitelist params
-          params.permit(:name, :user_id, :category, :img)
+          params.permit(:name, :user_id, :img)
         end
 
         def set_category
