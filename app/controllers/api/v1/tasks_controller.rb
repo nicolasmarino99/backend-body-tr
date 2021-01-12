@@ -5,13 +5,13 @@ module Api
 
         # GET /users/:id/tasks
         def index
-          @tasks = User.find(params[:user_id]).categories.find(params[:category_id]).tasks.all
+          @tasks = User.find(session[:user_id]).categories.find(params[:category_id]).tasks.all
           json_response(@tasks)
         end
 
         # POST /users
         def create
-          @task = User.find(params[:user_id]).categories.find(params[:category_id]).tasks.create!(permit_params)
+          @task = User.find(session[:user_id]).categories.find(params[:category_id]).tasks.create!(permit_params)
           json_response(@task, :created)
         end
 
