@@ -5,8 +5,8 @@ module Api
 
         # GET /users/:id/progress_items
         def index
-          @progress_items = User.find(params[:user_id]).categories
-                            .find(params[:category_id])
+          @progress_items = User.find(Category.find(Task.find(params[:task_id]).category_id).user_id).categories
+                            .find(Category.find(Task.find(params[:task_id]).category_id))
                             .tasks.find(params[:task_id])
                             .progress_items
                             .all
@@ -16,8 +16,8 @@ module Api
         # POST /users
         def create
 
-          @progress_item = User.find(params[:user_id]).categories
-                           .find(params[:category_id])
+          @progress_item = User.find(Category.find(Task.find(params[:task_id]).category_id).user_id).categories
+                           .find(Category.find(Task.find(params[:task_id]).category_id))
                            .tasks.find(params[:task_id])
                            .progress_items
                            .create!(permit_params)
@@ -47,7 +47,7 @@ module Api
 
         def permit_params
           # whitelist params
-          params.permit(:progress, :metric, :amount, :task_id, :name, :description, :id, :user_id)
+          params.permit(:progress, :metric, :amount, :task_id, :name, :description, :id)
         end
 
         def set_progress_item
