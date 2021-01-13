@@ -11,7 +11,7 @@ module Api
 
         # POST /users
         def create
-          @task = User.find(Category.find(Task.first.category_id).user_id).categories.find(params[:category_id]).tasks.create!(permit_params)
+          @task = User.find(Category.find(Task.find(params[:id]).category_id).user_id).categories.find(params[:category_id]).tasks.create!(permit_params)
           json_response(@task, :created)
         end
 
