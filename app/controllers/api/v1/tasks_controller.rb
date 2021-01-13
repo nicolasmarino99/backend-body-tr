@@ -5,7 +5,7 @@ module Api
 
         # GET /users/:id/tasks
         def index
-          @tasks = User.find(Category.find(Task.first.category_id).user_id).categories.find(params[:category_id]).tasks.all
+          @tasks = User.find(Category.find(Task.find(params[:id]).category_id).user_id).categories.find(params[:category_id]).tasks.all
           json_response(@tasks)
         end
 
