@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
-# model association
+  # model association
   has_many :progess_items, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :tasks, dependent: :destroy

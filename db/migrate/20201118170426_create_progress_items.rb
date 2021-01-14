@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProgressItems < ActiveRecord::Migration[6.0]
   def change
     create_table :progress_items do |t|
