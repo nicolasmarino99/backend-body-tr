@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class ProgressItem < ApplicationRecord
   belongs_to :task
-  validates_presence_of :metric, :amount
+
+  serialize :progress, Array
 end
